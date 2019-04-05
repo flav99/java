@@ -9,27 +9,27 @@ public class FileSearch extends GUI
 	public File F2 = new File("File2.txt");
 	public File F3 = new File("File3.txt");
 	public File F4 = new File("File4.txt");
-	private Scanner MyScanner;
-	private int counter1;
 
 	public void getword(String sentence)
 	{
 		this.sentence = sentence;
 	}
 	
-	public void ReadFile(String F1, String F2,String F3,String f4) throws FileNotFoundException
+	public void Getchoice(int counter) 
 	{
-		MyScanner = new Scanner(F1);
-		MyScanner.useDelimiter(",");
+		System.out.println(counter);
+	}
+	
+	public void ReadFile(String F1, String F2,String F3,String f4) throws Exception 
+	{
+		Scanner SC = new Scanner(F1);
+		SC.useDelimiter("");
 		
-		while(MyScanner.hasNext())
+		if(counter == 1)
 		{
-			sentence = MyScanner.next();
-			
-			if (sentence.equals(F1))
+			if(sentence.equals(F1))
 			{
-				counter1 ++;
-				System.out.println("found");
+				System.out.println("yesssssssss");
 			}
 		}
 	}

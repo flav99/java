@@ -1,11 +1,6 @@
-import javax.swing.JFrame;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JCheckBox;
+import javax.swing.*;
+import java.awt.event.*;
+import java.awt.*;
 
 public class GUI extends JFrame 
 {
@@ -16,6 +11,7 @@ public class GUI extends JFrame
 	public String sentence;
 	public JCheckBox F1,F2,F3,F4;
 	public JButton submit;
+	public int counter = 0;
 	  
 		  public void gui()
 		  {
@@ -66,31 +62,143 @@ public class GUI extends JFrame
 			   result.setColumns(10);
 			   
 			   //check box
-			   JCheckBox F1 = new JCheckBox("File1\r\n");
+			   F1 = new JCheckBox("File1\r\n");
 			   F1.setBounds(192, 54, 80, 23);
 			   getContentPane().add(F1);
 			   
-			   JCheckBox F2 = new JCheckBox("File2\r\n");
+			   F2 = new JCheckBox("File2\r\n");
 			   F2.setBounds(192, 80, 80, 14);
 			   getContentPane().add(F2);
 			   
-			   JCheckBox F3 = new JCheckBox("File3\r\n");
+			   F3 = new JCheckBox("File3\r\n");
 			   F3.setBounds(192, 97, 80, 23);
 			   getContentPane().add(F3);
 			   
-			   JCheckBox F4 = new JCheckBox("File4\r\n");
+			   F4 = new JCheckBox("File4\r\n");
 			   F4.setBounds(192, 118, 80, 23);
 			   getContentPane().add(F4);
 			   
+			   HandlerClass handler = new HandlerClass();
+			   
+			   //checks if check box is selected
+			   F1.addItemListener(handler);
+			   F2.addItemListener(handler);
+			   F3.addItemListener(handler);
+			   F4.addItemListener(handler);
+			   
 			   setVisible(true);			   
 		 }
+		  
+		private class HandlerClass implements ItemListener
+		{
+			public void itemStateChanged(ItemEvent Event)
+			{
+				//if 1,2,3,4
+				if(F1.isSelected() && F2.isSelected() && F3.isSelected() && F4.isSelected())
+				{
+					counter = 1;
+					Getchoice(counter);
+				}
+				//if 1,2,3
+				if(F1.isSelected() && F2.isSelected() && F3.isSelected())
+				{
+					counter = 2;
+					Getchoice(counter);
+				}
+				//if 1,2
+				if(F1.isSelected() && F2.isSelected())
+				{
+					counter = 3;
+					Getchoice(counter);
+				}
+				//if 1
+				if(F1.isSelected())
+				{
+					counter = 4;
+					Getchoice(counter);
+				}
+				//if 1,3
+				if(F1.isSelected() && F3.isSelected())
+				{
+					counter = 5;
+					Getchoice(counter);
+				}
+				//if 1,4
+				if(F1.isSelected() && F4.isSelected())
+				{
+					counter = 6;
+					Getchoice(counter);
+				}
+				//if 2,3,4
+				if(F2.isSelected() && F3.isSelected() && F4.isSelected())
+				{
+					counter = 7;
+					Getchoice(counter);
+				}
+				//if 2,3
+				if(F2.isSelected() && F3.isSelected())
+				{
+					counter = 8;
+					Getchoice(counter);
+				}
+				//if 2,4
+				if(F2.isSelected() && F4.isSelected())
+				{
+					counter = 9;;
+					Getchoice(counter);
+				}
+				//if 3,4
+				if(F3.isSelected() && F4.isSelected())
+				{
+					counter = 10;
+					Getchoice(counter);
+				}
+				//if 3
+				if(F3.isSelected())
+				{
+					counter = 11;
+					Getchoice(counter);
+				}
+				//if 4
+				if(F4.isSelected())
+				{
+					counter = 12;
+					Getchoice(counter);
+				}
+				// if 2
+				if(F2.isSelected())
+				{
+					counter = 13;
+					Getchoice(counter);
+				}
+				//if 1,2,4
+				if(F1.isSelected() && F2.isSelected() && F4.isSelected())
+				{
+					counter = 14;
+					Getchoice(counter);
+				}
+				//if 1,3,4
+				if(F1.isSelected() && F3.isSelected() && F4.isSelected())
+				{
+					counter = 15;
+					Getchoice(counter);
+				}
+			}
+		}
 
 		public GUI()
 		 {
 			 gui();
 		 }
 
-		 public void getword(String sentence)
+		 public void Getchoice(int counter)
+		 {
+			this.counter = counter;
+			FileSearch FS = new FileSearch();
+			FS.Getchoice(counter);
+		 }
+
+		public void getword(String sentence)
 		 {
 			this.sentence = sentence;
 			FileSearch FS = new FileSearch();

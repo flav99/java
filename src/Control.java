@@ -6,4 +6,4 @@ public class Control
 		GUI gui = new GUI();
 	}
 }
-       
+      
