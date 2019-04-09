@@ -12,13 +12,14 @@ public class GUI extends JFrame
 	public JCheckBox F1,F2,F3,F4;
 	public JButton submit;
 	public int counter = 0;
+	public int[] FileChosen = {0,0,0,0};
 	  
 		  public void gui()
 		  {
 			  
 			  JF = new JFrame();
 			  setLocation(100,100);
-
+			  
 			   //size of the frame  
 			   setSize(478,477);
 			   getContentPane().setLayout(null);
@@ -35,18 +36,7 @@ public class GUI extends JFrame
 			   title.setBounds(192, 11, 100, 39);
 			   getContentPane().add(title);
 			   
-			   //search button
 			   JButton submit = new JButton("search");
-			   submit.addActionListener(new ActionListener() {
-			   	
-				public void actionPerformed(ActionEvent e) 
-				{
-					 sentence = word.getText();
-					 getword(sentence);  
-					 System.out.println(sentence);
-			   	}
-			   });
-
 			   submit.setBounds(312, 54, 111, 39);
 			   getContentPane().add(submit);
 			   
@@ -77,131 +67,43 @@ public class GUI extends JFrame
 			   F4 = new JCheckBox("File4\r\n");
 			   F4.setBounds(192, 118, 80, 23);
 			   getContentPane().add(F4);
-			   
-			   HandlerClass handler = new HandlerClass();
-			   
-			   //checks if check box is selected
-			   F1.addItemListener(handler);
-			   F2.addItemListener(handler);
-			   F3.addItemListener(handler);
-			   F4.addItemListener(handler);
-			   
-			   setVisible(true);			   
+			   //search button
+			   submit.addActionListener(new ActionListener() {
+			   	
+				public void actionPerformed(ActionEvent e) 
+				{
+					 sentence = word.getText();
+					 
+					//if 1 is selected put 1 in array slot 0
+						if(F1.isSelected())
+						{
+							FileChosen[0] = 1;
+						}
+						//if 2 is selected put 1 in array slot 1
+						if(F2.isSelected())
+						{
+							FileChosen[1] = 1;
+						}
+						//if 3 is selected put 1 in array slot 2
+						if(F3.isSelected())
+						{
+							FileChosen[2] = 1;
+						}
+						//if 4 is selected put 1 in array slot 3
+						if(F4.isSelected())
+						{
+							FileChosen[3] = 1;
+						}
+						FileSearch FS = new FileSearch();
+						FS.getparams(sentence, FileChosen);
+			   	}
+			   });
+			   setVisible(true);	   
 		 }
 		  
-		private class HandlerClass implements ItemListener
-		{
-			public void itemStateChanged(ItemEvent Event)
-			{
-				//if 1,2,3,4
-				if(F1.isSelected() && F2.isSelected() && F3.isSelected() && F4.isSelected())
-				{
-					counter = 1;
-					Getchoice(counter);
-				}
-				//if 1,2,3
-				if(F1.isSelected() && F2.isSelected() && F3.isSelected())
-				{
-					counter = 2;
-					Getchoice(counter);
-				}
-				//if 1,2
-				if(F1.isSelected() && F2.isSelected())
-				{
-					counter = 3;
-					Getchoice(counter);
-				}
-				//if 1
-				if(F1.isSelected())
-				{
-					counter = 4;
-					Getchoice(counter);
-				}
-				//if 1,3
-				if(F1.isSelected() && F3.isSelected())
-				{
-					counter = 5;
-					Getchoice(counter);
-				}
-				//if 1,4
-				if(F1.isSelected() && F4.isSelected())
-				{
-					counter = 6;
-					Getchoice(counter);
-				}
-				//if 2,3,4
-				if(F2.isSelected() && F3.isSelected() && F4.isSelected())
-				{
-					counter = 7;
-					Getchoice(counter);
-				}
-				//if 2,3
-				if(F2.isSelected() && F3.isSelected())
-				{
-					counter = 8;
-					Getchoice(counter);
-				}
-				//if 2,4
-				if(F2.isSelected() && F4.isSelected())
-				{
-					counter = 9;;
-					Getchoice(counter);
-				}
-				//if 3,4
-				if(F3.isSelected() && F4.isSelected())
-				{
-					counter = 10;
-					Getchoice(counter);
-				}
-				//if 3
-				if(F3.isSelected())
-				{
-					counter = 11;
-					Getchoice(counter);
-				}
-				//if 4
-				if(F4.isSelected())
-				{
-					counter = 12;
-					Getchoice(counter);
-				}
-				// if 2
-				if(F2.isSelected())
-				{
-					counter = 13;
-					Getchoice(counter);
-				}
-				//if 1,2,4
-				if(F1.isSelected() && F2.isSelected() && F4.isSelected())
-				{
-					counter = 14;
-					Getchoice(counter);
-				}
-				//if 1,3,4
-				if(F1.isSelected() && F3.isSelected() && F4.isSelected())
-				{
-					counter = 15;
-					Getchoice(counter);
-				}
-			}
-		}
-
 		public GUI()
 		 {
 			 gui();
 		 }
 
-		 public void Getchoice(int counter)
-		 {
-			this.counter = counter;
-			FileSearch FS = new FileSearch();
-			FS.Getchoice(counter);
-		 }
-
-		public void getword(String sentence)
-		 {
-			this.sentence = sentence;
-			FileSearch FS = new FileSearch();
-			FS.getword(sentence);
-		 }
 }
