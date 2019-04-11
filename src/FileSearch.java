@@ -1,11 +1,8 @@
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.event.*;
-import java.awt.*;
-import java.lang.*;
-import java.util.*;
 import java.io.*;
-import java.lang.*;
+import java.util.*; 
+import java.*;
+import java.lang.String;
+
 public class FileSearch 
 {
 	public int i;
@@ -13,52 +10,41 @@ public class FileSearch
 	public String sentence1;
 	public int[] FileSelected;
 	
-	public void getparams(String sentence, int[] FileChosen)
+	public int[] getparams(String sentence, int[] FileChosen)
 	{
 		this.sentence1 = sentence;
-		this.FileSelected = FileChosen;
 		int[] CounterFile = {0,0,0,0};
 		int Count = 0;
+		
 		for(i=0; i<4; i++)
 		{
-			Count = 0;
-		//System.out.println(FileChosen[i]);
-			if(FileSelected[i] == 1)
+			if(FileChosen[i] == 1)
 			{
-				String fileName = FileName[i]; 
-				File file = new File(fileName);
-					
+				Count = 0;
 				//read method
 				BufferedReader reader;
+				String filename = FileName[i];
+				
 				try {
-				reader = new BufferedReader(new FileReader(file));
-					
-				String test = reader.readLine();
-				while (test != null)
+				reader = new BufferedReader(new FileReader(filename));
+				
+				String FileInUse = reader.readLine();
+				
+				String[] ArrayofFile = FileInUse.split(" ");
+				String[] SplittedString = sentence1.split(" ");
+				
+				for(int z=0; z<ArrayofFile.length; z++)
 				{
-					test = reader.readLine();
-					String[] arr = test.split(" ");
-						
-					for(String testSplit : arr)
+					for(int n=0; n<SplittedString.length; n++)
 					{
-						String[] arr2 = sentence1.split(" ");
-							
-						for(String sentence1 : arr2)
+						if(SplittedString[n].equals(ArrayofFile[z]))
 						{
-							if(sentence1.equals(testSplit))
-							{
-								Count = Count + 1;
-							}
+							Count +=1;
 						}
 					}
 				}
 				
 				CounterFile[i] = Count;
-				for(int k=0; k<4; k++)
-				{
-				System.out.println(CounterFile[k]);
-				}
-
 				reader.close();
 				}
 				catch(IOException e)
@@ -67,6 +53,7 @@ public class FileSearch
 				}
 			}
 		}
+	return CounterFile;
 	}
 }
 

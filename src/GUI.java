@@ -1,20 +1,28 @@
 import javax.swing.*;
+
+import java.awt.List;
 import java.awt.event.*;
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class GUI extends JFrame 
 {
 	private static final long serialVersionUID = 1L;
 	public JFrame JF;
 	public JTextField word;
-	public JTextField result;
 	public String sentence;
 	public JCheckBox F1,F2,F3,F4;
 	public JButton submit;
 	public int counter = 0;
 	public int[] FileChosen = {0,0,0,0};
-	  
-		  public void gui()
+	public int[] results = {0,0,0,0};
+	public int answer1 =0;
+	public int answer2 =0;
+	public int answer3 =0;
+	public int answer4 =0;
+	public String[] FileNames = {"File1.txt","File2.txt","File3.txt","File4.txt"};
+	
+		  public void frame()
 		  {
 			  
 			  JF = new JFrame();
@@ -39,17 +47,6 @@ public class GUI extends JFrame
 			   JButton submit = new JButton("search");
 			   submit.setBounds(312, 54, 111, 39);
 			   getContentPane().add(submit);
-			   
-			   //title for result
-			   JLabel lblResult = new JLabel("Result");
-			   lblResult.setBounds(209, 182, 46, 14);
-			   getContentPane().add(lblResult);
-			   
-			   //result text field
-			   result = new JTextField();
-			   result.setBounds(123, 209, 207, 136);
-			   getContentPane().add(result);
-			   result.setColumns(10);
 			   
 			   //check box
 			   F1 = new JCheckBox("File1\r\n");
@@ -94,16 +91,37 @@ public class GUI extends JFrame
 						{
 							FileChosen[3] = 1;
 						}
+						
 						FileSearch FS = new FileSearch();
-						FS.getparams(sentence, FileChosen);
+						results=FS.getparams(sentence, FileChosen);					
+						
+						answer1 = results[0];
+						answer2 = results[1];
+						answer3 = results[2];
+						answer4 = results[3];
+						
+						ArrayList<Integer> list = new ArrayList<Integer>(); 
+						list.add(answer1);
+						list.add(answer2);
+						list.add(answer3);
+						list.add(answer4);
+						
+						Collections.sort(list, Collections.reverseOrder());
+
+						System.out.println(list);
+						
+						System.out.println("the file with the most frequency of the word is : File1.txt with a result of: "+list.get(0));
+						System.out.println("the file with the second most frequency of the word is : File4.txt with a result of: "+list.get(1));
+						System.out.println("the file with the third most frequency of the word is : File3.txt with a result of: "+list.get(2));
+						System.out.println("the file with the fouth nost frequency of the word is : File2.txt with a result of: "+list.get(3));   
 			   	}
 			   });
 			   setVisible(true);	   
-		 }
+		  }
 		  
 		public GUI()
 		 {
-			 gui();
+			 frame();
 		 }
 
 }
