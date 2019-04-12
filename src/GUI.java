@@ -4,6 +4,7 @@ import java.awt.List;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.awt.Color;
 
 public class GUI extends JFrame 
 {
@@ -64,7 +65,16 @@ public class GUI extends JFrame
 			   F4 = new JCheckBox("File4\r\n");
 			   F4.setBounds(192, 118, 80, 23);
 			   getContentPane().add(F4);
+			   
+			   JTextArea ResultsShown = new JTextArea();
+			   ResultsShown.setBounds(54, 172, 356, 198);
+			   getContentPane().add(ResultsShown);
+			   
+			   JLabel lblResults = new JLabel("RESULTS");
+			   lblResults.setBounds(192, 148, 80, 26);
+			   getContentPane().add(lblResults);
 			   //search button
+			   
 			   submit.addActionListener(new ActionListener() {
 			   	
 				public void actionPerformed(ActionEvent e) 
@@ -93,27 +103,27 @@ public class GUI extends JFrame
 						}
 						
 						FileSearch FS = new FileSearch();
-						results=FS.getparams(sentence, FileChosen);					
+						results=FS.getparams(sentence, FileChosen);//retrieve the array with the counters for each file					
 						
-						answer1 = results[0];
-						answer2 = results[1];
-						answer3 = results[2];
-						answer4 = results[3];
+						answer1 = results[0];//puts frequency of file 1 into variable
+						answer2 = results[1];//puts frequency of file 2 into variable
+						answer3 = results[2];//puts frequency of file 3 into variable
+						answer4 = results[3];//puts frequency of file 4 into variable
 						
 						ArrayList<Integer> list = new ArrayList<Integer>(); 
-						list.add(answer1);
+						list.add(answer1);//adding to the list
 						list.add(answer2);
 						list.add(answer3);
 						list.add(answer4);
 						
-						Collections.sort(list, Collections.reverseOrder());
+						Collections.sort(list, Collections.reverseOrder());//sorting the list
 
-						System.out.println(list);
-						
-						System.out.println("the file with the most frequency of the word is : File1.txt with a result of: "+list.get(0));
-						System.out.println("the file with the second most frequency of the word is : File4.txt with a result of: "+list.get(1));
-						System.out.println("the file with the third most frequency of the word is : File3.txt with a result of: "+list.get(2));
-						System.out.println("the file with the fouth nost frequency of the word is : File2.txt with a result of: "+list.get(3));   
+						//displays the results in a text area
+					    ResultsShown.append("\n the word was found in text file " +FileNames[0] +" with a frequency of: " +results[0]);
+					    ResultsShown.append("\n the word was found in text file " +FileNames[1] +" with a frequency of: " +results[1]);
+					    ResultsShown.append("\n the word was found in text file " +FileNames[2] +" with a frequency of: " +results[2]);
+					    ResultsShown.append("\n the word was found in text file " +FileNames[3] +" with a frequency of: " +results[3]);
+					    ResultsShown.append("\n\n the freqency displayed in order: "+list.toString());
 			   	}
 			   });
 			   setVisible(true);	   
@@ -121,7 +131,8 @@ public class GUI extends JFrame
 		  
 		public GUI()
 		 {
-			 frame();
+			setBackground(Color.RED);
+			getContentPane().setForeground(Color.BLACK);
+			frame();
 		 }
-
 }

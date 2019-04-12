@@ -16,9 +16,10 @@ public class FileSearch
 		int[] CounterFile = {0,0,0,0};
 		int Count = 0;
 		
+		//loops through the array holding the file names
 		for(i=0; i<4; i++)
 		{
-			if(FileChosen[i] == 1)
+			if(FileChosen[i] == 1)//if 1 is found in the area compare the string to the file
 			{
 				Count = 0;
 				//read method
@@ -30,21 +31,21 @@ public class FileSearch
 				
 				String FileInUse = reader.readLine();
 				
-				String[] ArrayofFile = FileInUse.split(" ");
-				String[] SplittedString = sentence1.split(" ");
+				String[] ArrayofFile = FileInUse.split(" ");//splits the file 
+				String[] SplittedString = sentence1.split(" ");//splits the string
 				
-				for(int z=0; z<ArrayofFile.length; z++)
+				for(int z=0; z<ArrayofFile.length; z++)//loops through the file
 				{
-					for(int n=0; n<SplittedString.length; n++)
+					for(int n=0; n<SplittedString.length; n++)//loops through the array holding the string 
 					{
 						if(SplittedString[n].equals(ArrayofFile[z]))
 						{
-							Count +=1;
+							Count +=1;//if there is a match increment the counter
 						}
 					}
 				}
 				
-				CounterFile[i] = Count;
+				CounterFile[i] = Count;//places the counter inside an array holding the frequency of how many times the word came up in the file
 				reader.close();
 				}
 				catch(IOException e)
@@ -53,7 +54,7 @@ public class FileSearch
 				}
 			}
 		}
-	return CounterFile;
+	return CounterFile;//return the array holding the frequency 
 	}
 }
 
